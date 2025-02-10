@@ -10,15 +10,16 @@ public class BlocosDeNotas {
         this.contadorId = 1;
     }
 
-    public String adicionarAnotacoes(String texto) {
-        if (texto != null) {
-            Anotacao novaAnotacao = new Anotacao(contadorId, texto);
-            anotacoes.add(novaAnotacao);
-            contadorId++;
-            return "Adicionado com sucesso! ID: " + novaAnotacao.getId();
+    public String adicionarAnotacoes(String texto) throws Exception {
+        if (texto == null || texto.trim().isEmpty()) {
+            throw new Exception("Erro, você precisa digitar algo");
         }
-        return "Erro: Texto da anotação não pode ser nulo.";
+        Anotacao novaAnotacao = new Anotacao(contadorId, texto);
+        anotacoes.add(novaAnotacao);
+        contadorId++;
+        return ("Anotação adicionada com sucesso. Id: " + novaAnotacao.getId());
     }
+
 
     public String editarAnotacao(int id, String novoTexto) {
         for (Anotacao anotacao : anotacoes) {
@@ -30,22 +31,26 @@ public class BlocosDeNotas {
         return "Erro: Anotação não encontrada!";
     }
 
-    public String removerAnotacao(int id) {
+    public String removerAnotacao(int id)throws Exception {
         for (Anotacao anotacao : anotacoes) {
-            if (anotacao.getId() == id && !anotacao.getRemovida()) {
-                anotacao.setRemovida(true);
-                return "Anotação removida com sucesso.";
+            if (anotacao.getId() != id && anotacao.getRemovida().equals(false)) {
+                anotacao.setRemovida(false);
+                throw new Exception("Erro: Anotação não encontrada ou já removida");
             }
         }
-        return "Erro: Anotação não encontrada ou já removida.";
+        return "Anotação removida com sucesso!";
     }
 
-    public List<Anotacao> buscarAnotacoes(String texto) {
+    public List<Anotacao> buscarAnotacoes(String texto)throws Exception {
         List<Anotacao> resultados = new ArrayList<>();
         for (Anotacao anotacao : anotacoes) {
             if (anotacao.getAnotacao().contains(texto) && !anotacao.getRemovida()) {
                 resultados.add(anotacao);
             }
+        }
+        if (resultados.isEmpty()) {
+            throw new Exception("ERRO, Texto não encontrado.");
+
         }
         return resultados;
     }
