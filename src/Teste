@@ -1,0 +1,66 @@
+import org.junit.jupiter.api.Test;
+
+import java.util.Date;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class AnotacaoTest {
+
+    @Test
+    void getAnotacao() {
+        Anotacao anotacaoGet = new Anotacao(1, "Ola Mundo");
+        assertEquals("Ola Mundo", anotacaoGet.getAnotacao() );
+    }
+
+    @Test
+    void setAnotacao() {
+        Anotacao anotacaoSet = new Anotacao(2, "Maxsuel tá estudando java");
+        anotacaoSet.setAnotacao("Estou revisando interface");
+        assertEquals("Estou revisando interface", anotacaoSet.getAnotacao());
+    }
+
+    @Test
+    void getId() {
+        Anotacao anotacaoGetId = new Anotacao(3, "Oii");
+        assertEquals(3, anotacaoGetId.getId());
+    }
+
+    @Test
+    void setId() {
+        Anotacao anotacaoSet = new Anotacao(4, "Boa tarde");
+        anotacaoSet.setAnotacao("Fala comigo");
+        assertEquals("Fala comigo", anotacaoSet.getAnotacao());
+    }
+
+    @Test
+    void getDataCriacao() {
+        Anotacao anotacaoGetDataCriacao = new Anotacao(8, "Alô");
+        Date dataEsperada = new Date();
+        assertEquals(dataEsperada, anotacaoGetDataCriacao.getDataCriacao());
+
+
+    }
+
+    @Test
+    void setDataCriacao() {
+        Anotacao anotacaoSetData = new Anotacao(9, "Tudo bem?");
+        Date dataNova = new Date();
+        anotacaoSetData.setDataCriacao(dataNova);
+        assertEquals(dataNova, anotacaoSetData.getDataCriacao());
+    }
+
+    @Test
+    void getRemovida() {
+        Anotacao anotacaoGetRemovida = new Anotacao(10, "Isso é o amor");
+        assertEquals(false, anotacaoGetRemovida.getRemovida());
+    }
+
+    @Test
+    void setRemovida() {
+        Anotacao anotacaoSetRemovida = new Anotacao(11, "Flamengo");
+        anotacaoSetRemovida.setRemovida(true);
+        assertEquals(true, anotacaoSetRemovida.getRemovida());
+
+        anotacaoSetRemovida.setRemovida(false);
+        assertEquals(false, anotacaoSetRemovida.getRemovida());
+    }
